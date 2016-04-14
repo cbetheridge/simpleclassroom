@@ -1,5 +1,11 @@
 {% extends "base_standard_nav.html" %}
 
+{% block head %}
+<script>var db_class_list="{{ stored_classes }}"</script>
+<script src="static/closure-library/closure/goog/base.js"></script>
+<script src="static/js/classrooms.js"></script>
+{% endblock %}
+
 {% block content %}
 <form id="add_classroom">
   <span class="normal_text">Create a new classroom named: </span>
@@ -10,9 +16,7 @@
 </form>
 <br>
 <h4>Class list: </h4>
-<ul id="class_list">
-{% for class in stored_classes %}
-  <li>{{ class }}</li>
-{% endfor %}
-</ul>
+<div id="class_list">
+<script>cr.classroom.InstantiateClassList()</script>
+</div>
 {% endblock %}
