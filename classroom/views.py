@@ -6,4 +6,5 @@ def index(request):
 	return render(request, "base.html", {})
 
 def classrooms(request):
-  return render(request, "classrooms.html", {})
+  return render(request, "classrooms.html", {
+      "stored_classes": ["1st Period", "2nd Period", "3rd Period"]})

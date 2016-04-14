@@ -1,6 +1,42 @@
-.leftnav {
+/* General page layout */
+* {
+  margin:0;
+  padding:0;
+}
+
+html, body, .max_height {
+  height: 100%;
+}
+
+#header {
+  background-color: aliceblue;
   border-style: solid;
-  float: left;
-  margin-right: .5em;
+  border-width: .1em;
   padding: .5em;
+}
+
+#leftnav {
+  background-color: aliceblue;
+  border-style: solid;
+  border-width: 0 .1em 0 .1em;
+  height: 100%;
+  float: left;
+}
+
+#main_content {
+  float: left;
+}
+
+#outer_content div {
+  padding: .5em;
+}
+
+/* Main content styling */
+
+ul {
+  list-style-position: inside;
+}
+
+.text_input {
+  padding: .2em;
 }

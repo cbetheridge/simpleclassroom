@@ -1,5 +1,18 @@
 {% extends "base_standard_nav.html" %}
 
 {% block content %}
-This is the classroom list
+<form id="add_classroom">
+  <span class="normal_text">Create a new classroom named: </span>
+  <input type="text" class="text_input" name="add_class_name"
+   value="3rd period" />
+  <input type="button" name="add_class_submit" onclick="alert('Class add.')"
+   value="Add" />
+</form>
+<br>
+<h4>Class list: </h4>
+<ul id="class_list">
+{% for class in stored_classes %}
+  <li>{{ class }}</li>
+{% endfor %}
+</ul>
 {% endblock %}

@@ -1,4 +1,5 @@
 {% load static from staticfiles %}
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <base href="/">
@@ -6,21 +7,27 @@
     <link href="static/styles.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <div class="leftnav">
-    {% block leftnav %}
+    <div id="header">
+    {% block header %}
     {% endblock %}
     </div>
-    <div class="main_content">
-    {% block content %}
-      This site failed to load. Please take the following actions:
-      <ol>
-        <li>Panic.</li>
-        <li>Keep Panicing.</li>
-        <li>That's right...</li>
-        <li>OK, now stop.</li>
-        <li>Contact the website administrator and complain.</li>
-      </ol>
-    {% endblock %}
+    <div class="max_height" id="outer_content">
+      <div class="max_height" id="leftnav">
+      {% block leftnav %}
+      {% endblock %}
+      </div>
+      <div class="max_height" id="main_content">
+      {% block content %}
+        This site failed to load. Please take the following actions:
+        <ol>
+          <li>Panic.</li>
+          <li>Keep Panicing.</li>
+          <li>That's right...</li>
+          <li>OK, now stop.</li>
+          <li>Contact the website administrator and complain.</li>
+        </ol>
+      {% endblock %}
+      </div>
     </div>
   </body>
 </html>
