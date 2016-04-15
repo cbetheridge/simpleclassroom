@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from classroom import views
+from views import views
 
 urlpatterns = [
   url(r'^$', views.display_index, name='index'),
