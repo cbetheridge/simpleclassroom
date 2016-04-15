@@ -8,15 +8,19 @@ html, body, .max_height {
   height: 100%;
 }
 
+table, th, td {
+    border: .1em solid black;
+}
+
 #header {
   background-color: aliceblue;
-  border-style: solid;
-  border-width: .1em;
+  border: .1em solid black;
   padding: .5em;
 }
 
 #leftnav {
   background-color: aliceblue;
+  border-color: black;
   border-style: solid;
   border-width: 0 .1em 0 .1em;
   height: 100%;
@@ -24,7 +28,7 @@ html, body, .max_height {
 }
 
 #main_content {
-  float: left;
+  overflow: hidden;
 }
 
 #outer_content div {
@@ -37,6 +41,19 @@ ul {
   list-style-position: inside;
 }
 
-.text_input {
+.text_input, .normal_text {
   padding: .2em;
+}
+
+.class_del_button {
+  margin: 0 .2em 0 .2em;
+}
+
+#class_list_table {
+  border-collapse: collapse;
+  width: 95%;
+}
+
+.class_list_button {
+  width: 1px;
 }
