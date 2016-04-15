@@ -13,3 +13,12 @@ def display_classrooms(request):
 
 def add_classroom(request):
   pass
+
+def display_class_details(request):
+	return render(request, 'classroom_details.html', {})
+
+def display_students(request):
+	return render(request, 'student_list.html', {})
+
+def display_student_details(request):
+	return render(request, 'student_details.html', {})
