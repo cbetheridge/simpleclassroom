@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader 
 
@@ -10,9 +9,6 @@ def display_index(request):
 def display_classrooms(request):
   return render(request, 'classrooms.html', {
       'stored_classes': json.dumps(['1st Period', '2nd Period', '3rd Period'])})
-
-def add_classroom(request):
-  pass
 
 def display_class_details(request):
 	return render(request, 'classroom_details.html', {})
