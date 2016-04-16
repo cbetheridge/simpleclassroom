@@ -6,10 +6,10 @@ goog.require('goog.string');
 
 
 cr.classroom.initializeClassList = function() {
-  var unsafe_class_names = this.getStoredClassList();
+  var classes_data = this.getStoredClassList();
 
-  unsafe_class_names.forEach(function(class_name) {
-    cr.classroom.createClassEl(class_name);
+  classes_data.forEach(function(class_data) {
+    cr.classroom.createClassEl(class_data);
   });
 };
 
@@ -19,7 +19,7 @@ cr.classroom.initializeAddClassEvent = function() {
                      cr.classroom.createClassElViaAddButton);
 };
 
-cr.classroom.createClassEl = function(class_name) {
+cr.classroom.createClassEl = function(class_data) {
   this.class_list_root = 
     this.class_list_root || goog.dom.getElement('class_list_table');
 
@@ -28,11 +28,11 @@ cr.classroom.createClassEl = function(class_name) {
 
   var class_name_el = goog.dom.createDom('td',
     {'class': 'class_list_name normal_text'});
-  class_name_el.innerHTML = class_name;
+  class_name_el.innerHTML = class_data['name'];
 
   var class_del_button = goog.dom.createDom('input', 
     {'type': 'button', 'class': 'class_del_button', 'value': 'Delete',
-     'data-classname': class_name});
+     'data-classid': class_data['id']});
   var class_del_button_el = goog.dom.createDom(
     'td', {'class': 'class_list_button'}, class_del_button);
 
@@ -48,15 +48,19 @@ cr.classroom.createClassEl = function(class_name) {
 cr.classroom.createClassElViaAddButton = function(unused_e) {
   var class_name = goog.dom.getElement('add_class_text_field').value;
   
-  var add_class_callback = function(success_bool) {
+  var add_class_callback = function(success_bool, response_obj) {
     if (success_bool) {
-      cr.classroom.createClassEl(goog.string.htmlEscape(class_name));
+      var class_data = {
+        'id': response_obj['id'],
+        'name': goog.string.htmlEscape(class_name)};
+
+      cr.classroom.createClassEl(class_data);
     } else {
       console.log('Failed to add class to backend: ' + class_name);
     }
   };
 
-  cr.xhr.addClassroom(class_name, add_class_callback);
+  cr.xhr.addClassroom({'name': class_name}, add_class_callback);
 };
 
 cr.classroom.getStoredClassList = function() {
@@ -66,17 +70,17 @@ cr.classroom.getStoredClassList = function() {
 
 cr.classroom.deleteClassroom = function(e) {
   var del_button = e.target;
-  var class_name = del_button.dataset.classname;
+  var class_id = del_button.dataset.classid;
 
   var del_class_callback = function(success_bool) {
     if (success_bool) {
       cr.classroom.removeClassroomEl(del_button);
     } else {
-      console.log('Failed to Delete classroom: ' + class_name);
+      console.log('Failed to Delete classroom: ' + class_id);
     }
   };
 
-  cr.xhr.delClassroom(class_name, del_class_callback);
+  cr.xhr.delClassroom({'id': class_id}, del_class_callback);
 };
 
 cr.classroom.removeClassroomEl = function(delete_button) {
