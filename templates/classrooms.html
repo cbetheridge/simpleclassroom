@@ -1,10 +1,8 @@
 {% extends "base_standard_nav.html" %}
 
 {% block head %}
-<script>var db_class_list="{{ stored_classes }}"</script>
-<script src="static/third-party/closure-library/closure/goog/base.js"></script>
+<script>var cr_class_list="{{ stored_classes }}" || null</script>
 <script src="static/js/classrooms.js"></script>
-<script src="static/js/xhr.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -14,7 +12,11 @@
   <input type="button" id="add_class_submit" value="Add" />
 </form>
 <br>
-<h4>Class list: </h4>
-<table id="class_list_table"></table>
-<script>cr.classroom.initializeClassroom()</script>
+<section class="table-root" id="class_list_table">
+  <header class="table-row table-border">
+    <div class="hundred-pct-cell table-border"><strong>Classrooms</strong></div>
+    <div class="min-cell table-border"></div>
+  </header>
+</section>
+<script>cr.classroom.initialize()</script>
 {% endblock %}

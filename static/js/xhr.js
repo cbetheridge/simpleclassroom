@@ -5,10 +5,6 @@ goog.require('goog.net.cookies');
 goog.require('goog.net.XhrIo');
 
 cr.xhr.CSRF_HEADER = null;
-cr.xhr.URLS = {
-  'addClassroom': '/io/add_class/',
-  'delClassroom': '/io/del_class/'
-};
 
 
 cr.xhr.addClassroom = function(class_name, callback) {
@@ -19,7 +15,7 @@ cr.xhr.addClassroom = function(class_name, callback) {
     callback(request.isSuccess(), this.getResponseJson()[0]);
   });
 
-  request.send(this.URLS['addClassroom'], 'POST',
+  request.send(cr.common.URLS['addClassroom'], 'POST',
                JSON.stringify(class_name), cr.xhr.CSRF_HEADER);
 };
 
@@ -31,8 +27,14 @@ cr.xhr.delClassroom = function(class_id, callback) {
     callback(request.isSuccess());
   });
 
-  request.send(this.URLS['delClassroom'], 'POST',
+  request.send(cr.common.URLS['delClassroom'], 'POST',
                JSON.stringify(class_id), cr.xhr.CSRF_HEADER);
+};
+
+cr.xhr.removeStudentFromClass = function(student_id, class_id, callback) {
+  cr.xhr.ensureCSRF();
+  var request = new goog.net.XhrIo();
+
 };
 
 cr.xhr.ensureCSRF = function() {

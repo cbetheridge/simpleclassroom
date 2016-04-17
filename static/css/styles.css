@@ -8,10 +8,6 @@ html, body, .max_height {
   height: 100%;
 }
 
-table, th, td {
-    border: .1em solid black;
-}
-
 #header {
   background-color: aliceblue;
   border: .1em solid black;
@@ -49,11 +45,37 @@ ul {
   margin: 0 .2em 0 .2em;
 }
 
-#class_list_table {
+.table-border {
+  border: .1em solid black;
   border-collapse: collapse;
-  width: 95%;
 }
 
-.class_list_button {
-  width: 1px;
+.table-root {
+  display: table;
+  width: 97%;
+}
+
+.table-row {
+  display: table-row;
+  width: 100%;
+}
+
+.hundred-pct-cell {
+  display: table-cell;
+  width: 100%;
+}
+
+.fifty-pct-cell {
+  display: table-cell;
+  width: 50%;
+}
+
+.twenty-pct-cell {
+  display: table-cell;
+  width: 20%;
+}
+
+.min-cell {
+  display: table-cell;
+  width: 1%;
 }

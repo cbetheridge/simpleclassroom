@@ -23,8 +23,16 @@ def display_classrooms(request):
 @ensure_csrf_cookie
 @require_GET
 def display_class_details(request):
+  payload = request.GET if request.GET else 'No Data'
+  class_id = payload['Id']
+
+  class_obj = Classroom.objects.get(pk=class_id)
+  students = [c.get_jsonable_repr() for c in class_obj.students.all()]
+
   template = get_template('classroom_details.html')
-  context = RequestContext(request, {})
+  context = RequestContext(request, {
+      'class_name': class_obj.name, 'class_desc': class_obj.desc,
+      'class_student_data': json.dumps(students)})
   return HttpResponse(template.render(context))
 
 @ensure_csrf_cookie
