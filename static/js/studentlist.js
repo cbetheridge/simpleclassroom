@@ -1,26 +1,26 @@
-goog.provide('cr.classview');
+goog.provide('cr.studentlist');
 
 goog.require('goog.dom');
 goog.require('goog.events');
 goog.require('goog.Uri');
 
-cr.classview.CLASSID = null;
+cr.studentlist.CLASSIDS = null;
 
 
-cr.classview.initialize = function() {
+cr.studentlist.initialize = function() {
   if (cr_student_list != null) {
     var students_data = cr.common.decodeJson (cr_student_list);
 
     students_data.forEach(function(student) {
-      cr.classview.createStudentEl(student);
+      cr.studentlist.createStudentEl(student);
     });
   }
 
   var uri = goog.Uri.parse(window.location);
-  cr.classview.CLASSID = uri.getParameterValues('id');
+  cr.studentlist.CLASSIDS = uri.getParameterValues('id');
 };
 
-cr.classview.createStudentEl = function(student_data) {
+cr.studentlist.createStudentEl = function(student_data) {
   this.student_list_root = 
     this.student_list_root || goog.dom.getElement('student_list_table');
 
@@ -36,7 +36,7 @@ cr.classview.createStudentEl = function(student_data) {
 
   var del_button = goog.dom.createDom('input', 
     {'type': 'button', 'class': 'student_del_button', 'value': 'Remove',
-     'data-classid': cr.classview.CLASSID,
+     'data-classid': cr.studentlist.CLASSIDS,
      'data-studentid': student_data['id']});
   var del_button_el = goog.dom.createDom('div',
     {'class': 'min-cell table-border'}, del_button);

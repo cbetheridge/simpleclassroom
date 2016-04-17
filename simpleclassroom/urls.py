@@ -22,9 +22,8 @@ from views import io
 urlpatterns = [
   url(r'^$', views.display_classrooms, name='index'),
   url(r'^classrooms/', views.display_classrooms, name='classrooms'),
-  url(r'^class_view/', views.display_class_details, name='class details'),
-  url(r'^students/', views.display_students, name='students'),
-  url(r'^student_view/', views.display_student_details, name='student details'),
+  url(r'^student_list/', views.display_students, name='student list'),
+  url(r'^student_view/', views.display_student_details, name='student view'),
   url(r'^io/add_class/', io.add_classroom, name='Add Class'),
   url(r'^io/del_class/', io.delete_classroom, name='Delete Class'),
   url(r'^admin/', admin.site.urls),

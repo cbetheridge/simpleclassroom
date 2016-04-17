@@ -23,7 +23,7 @@ cr.classroom.createClassEl = function(class_data) {
   this.class_list_root = 
     this.class_list_root || goog.dom.getElement('class_list_table');
 
-  var details_url = cr.common.URLS['classDetails'] + '?Id=' + class_data['id'];
+  var details_url = cr.common.URLS['studentList'] + '?Id=' + class_data['id'];
   var class_link_el = goog.dom.createDom('a',
     {'href': details_url});
   class_link_el.innerHTML = class_data['name'];

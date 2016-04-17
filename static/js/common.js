@@ -3,8 +3,7 @@ goog.provide('cr.common');
 cr.common.URLS = {
   'addClassroom': '/io/add_class/',
   'delClassroom': '/io/del_class/',
-  'classDetails': '/class_view/',
-  'studentDetails': '/student_view/',
+  'studentList': '/student_list/',
 };
 
 cr.common.decodeJson = function(escaped_json) {
