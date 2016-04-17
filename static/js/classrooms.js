@@ -5,16 +5,14 @@ goog.require('goog.events');
 goog.require('goog.string');
 
 
-cr.classroom.initializeClassList = function() {
+cr.classroom.initializeClassroom = function() {
   var classes_data = this.getStoredClassList();
+  var add_button = goog.dom.getElement('add_class_submit');
 
   classes_data.forEach(function(class_data) {
     cr.classroom.createClassEl(class_data);
   });
-};
 
-cr.classroom.initializeAddClassEvent = function() {
-  var add_button = goog.dom.getElement('add_class_submit');
   goog.events.listen(add_button, goog.events.EventType.CLICK,
                      cr.classroom.createClassElViaAddButton);
 };
