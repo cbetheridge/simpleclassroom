@@ -64,3 +64,20 @@ def delete_student(request):
   target.delete()    
 
   return HttpResponse('OK')
+
+@require_POST
+def enroll_student(request):
+  params = request.POST if request.POST else None
+  params = json.loads(list(params)[0])
+  return HttpResponse('OK')
+
+@require_POST
+def unenroll_student(request):
+  params = request.POST if request.POST else None
+  params = json.loads(list(params)[0])
+
+  member = Membership.objects.get(
+    classroom=params['class_id'], student=params['student_id'])
+  member.delete()
+
+  return HttpResponse('OK')

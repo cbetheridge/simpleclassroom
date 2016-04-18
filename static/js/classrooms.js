@@ -82,7 +82,7 @@ cr.classroom.deleteClassroom = function(e) {
 };
 
 cr.classroom.removeClassroomEl = function(delete_button) {
-  /* Should be the <tr> element. */
+  /* Should be the row element. */
   var row = delete_button.parentNode.parentNode;
   /* Table element. */
   row.parentNode.removeChild(row);

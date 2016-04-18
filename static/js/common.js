@@ -5,6 +5,8 @@ cr.common.URLS = {
   'delClassroom': '/io/del_class/',
   'addStudent': '/io/add_student/',
   'delStudent': '/io/del_student/',
+  'enrollStudent': '/io/enroll/',
+  'unenrollStudent': '/io/unenroll/',
   'studentList': '/student_list/',
   'studentDetails': '/student_details/',
 };

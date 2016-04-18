@@ -28,5 +28,7 @@ urlpatterns = [
   url(r'^io/del_class/', io.delete_classroom, name='delete class'),
   url(r'^io/add_student/', io.add_student, name='add student'),
   url(r'^io/del_student/', io.delete_student, name='delete student'),
+  url(r'^io/enroll/', io.enroll_student, name='enroll student'),
+  url(r'^io/unenroll/', io.unenroll_student, name='unenroll student'),
   url(r'^admin/', admin.site.urls),
 ]
