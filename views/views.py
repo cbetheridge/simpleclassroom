@@ -48,7 +48,7 @@ def display_students(request):
     class_desc = 'All Classes'
   else:
     class_ids = [params['Id']]
-    print("MOTHERFUCKING SNAKES %s" % class_ids)
+
     s_query = s_query.filter(membership__classroom__pk__in=class_ids)
    
     class_objs = Classroom.objects.filter(pk__in=class_ids)

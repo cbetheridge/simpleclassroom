@@ -7,9 +7,14 @@
 
 {% block content %}
 <div id="classroom_details">
-  <div class="normal_text">Classroom Name: {{ class_name|safe }}</div>
-  <div class="normal_text">Description: {{ class_desc }}</div>
+  <div class="normal_text">
+    <strong>Classroom Name: </strong>{{ class_name|safe }}
+  </div>
+  <div class="normal_text">
+    <strong>Description: </strong>{{ class_desc }}
+  </div>
 </div>
+<h4>Student List:</h4>
 <section class="table-root" id="student_list_table">
   <header class="table-row table-border">
     <div class="min-cell table-border"><strong>ID</strong></div>
@@ -19,5 +24,41 @@
     <div class="min-cell table-border"></div>
   </header>
 </section>
+<br />
+<h4>Add a new Student:</h4>
+<form class="table-root" onsubmit="return false;" id="add_student_form">
+  <header class="table-row">
+    <div class="large-cell">
+      <label class="small-cell">FirstName</label>
+      <input type="text" class="text_input large-cell" name="first_name" />
+    </div>
+    <div class="large-cell">
+      <label class="small-cell">LastName</label>
+      <input type="text" class="text_input large-cell" name="last_name" />
+    </div>
+  </header>
+  <header class="table-row">
+    <div class="large-cell">
+      <label class="small-cell">Email</label>
+      <input type="text" class="text_input large-cell" name="email" />
+    </div>
+    <div class="large-cell">
+      <label class="small-cell">Add to this classroom?</label>
+      <br />
+      <span class="large-cell">
+        <input type="radio" name="add" id="add_to_class_Yes"
+         value="Yes" checked />Yes
+        <input type="radio" name="add" id="add_to_class_No" value="No" />No
+      </span>
+   </div>
+  </header>
+  <header class="table-row">
+    <div class="large-cell">
+      <input type="button" class="button" id="new_student_button"
+       value="Add Student"
+       onclick="cr.studentlist.createStudentFormSubmit();" />
+    </div>
+  </header>
+</form>
 <script>cr.studentlist.initialize()</script>
 {% endblock %}

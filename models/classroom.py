@@ -28,7 +28,7 @@ class Student (models.Model):
             'last_name': self.last_name, 'email': self.email}
 
   class Meta:
-    ordering = ['name']
+    ordering = ['last_name']
 
   def __str__(self):
     return self.full_name

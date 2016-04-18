@@ -19,6 +19,18 @@ cr.xhr.addClassroom = function(class_name, callback) {
                JSON.stringify(class_name), cr.xhr.CSRF_HEADER);
 };
 
+cr.xhr.addStudent = function(student_data, callback) {
+  cr.xhr.ensureCSRF();
+  var request = new goog.net.XhrIo();
+
+  goog.events.listen(request, 'complete', function(e) {
+    callback(request.isSuccess(), this.getResponseJson());
+  });
+
+  request.send(cr.common.URLS['addStudent'], 'POST',
+               JSON.stringify(student_data), cr.xhr.CSRF_HEADER);
+};
+
 cr.xhr.delClassroom = function(class_id, callback) {
   cr.xhr.ensureCSRF();
   var request = new goog.net.XhrIo();
