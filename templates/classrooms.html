@@ -1,7 +1,9 @@
 {% extends "base_standard_nav.html" %}
 
 {% block head %}
-<script>var cr_class_list="{{ stored_classes }}" || null</script>
+<script>
+  var cr_class_list="{{ stored_classes }}" || null
+  var cr_student_list="{{ stored_students }}" || null</script>
 <script src="static/js/classrooms.js"></script>
 {% endblock %}
 
@@ -18,5 +20,26 @@
     <div class="min-cell table-border"></div>
   </header>
 </section>
+<h4>Enroll a student in a class:</h4>
+<section class="table-root" id="enroll_student_table">
+  <header class="table-row">
+    <div class="large-cell"><strong>Classroom</strong></div>
+    <div class="large-cell"><strong>Student</strong></div>
+    <div class="min-cell"></div>
+  </header>
+  <form class="table-row" id="enroll_student_form">
+    <div class="large-cell">
+      <select id="classroom_select" name="class"></select>
+    </div>
+    <div class="large-cell">
+      <select id="student_select" name="student"></select>
+    </div>
+    <div class="min-cell">
+      <input type="button" id="enroll_student_button" value="Enroll"
+       onclick="cr.classroom.enrollStudentViaButton();" />
+    </div>
+  </form>
+</section>
+<span class="normal_text" id="enroll_notification"></span>
 <script>cr.classroom.initialize()</script>
 {% endblock %}

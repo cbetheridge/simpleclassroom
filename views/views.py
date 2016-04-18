@@ -29,8 +29,15 @@ def display_classrooms(request):
 
   db_classes = Classroom.objects.all()
   classes_repr = [c.get_jsonable_repr() for c in db_classes]
+
+  db_students = Student.objects.all()
+  students_list = []
+  for student in db_students:
+    students_list.append({'id': student.pk, 'name': student.full_name})
+
   context = RequestContext(request, {
-      'stored_classes': json.dumps(classes_repr)})
+      'stored_classes': json.dumps(classes_repr),
+      'stored_students': json.dumps(students_list)})
 
   return HttpResponse(template.render(context))
 

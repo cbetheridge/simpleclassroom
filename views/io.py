@@ -1,6 +1,7 @@
 import json
 
 from django.http import HttpResponse
+from django.utils import html
 from django.views.decorators.http import require_POST
 
 from models.classroom import Classroom
@@ -48,7 +49,7 @@ def add_student(request):
 
   if (params['add'][0] == 'Yes' and
       params['class_id'][0]):
-    class_id = params['class_id'][0]
+    class_id = params['class_id']
     assigned_classroom = Classroom.objects.get(pk=class_id)
     member = Membership(classroom=assigned_classroom, student=new_student)
     member.save()
@@ -69,7 +70,15 @@ def delete_student(request):
 def enroll_student(request):
   params = request.POST if request.POST else None
   params = json.loads(list(params)[0])
-  return HttpResponse('OK')
+
+  classroom = Classroom.objects.get(pk=params['class'][0])
+  student = Student.objects.get(pk=params['student'][0])
+  member = Membership(classroom=classroom, student=student)
+  member.save()
+
+  message = '{} has been enrolled in {}'.format(
+    student.first_name, classroom.name)
+  return HttpResponse(html.escape(message))
 
 @require_POST
 def unenroll_student(request):

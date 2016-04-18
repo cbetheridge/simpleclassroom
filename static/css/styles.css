@@ -33,6 +33,11 @@ html, body, .max_height {
 
 .sidebar {
   width: 8em;
+  height: 95%
+}
+
+.sidebar-spacer {
+  height: 60%
 }
 
 /* Main content styling */

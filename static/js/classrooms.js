@@ -1,6 +1,7 @@
 goog.provide('cr.classroom');
 
 goog.require('goog.dom');
+goog.require('goog.dom.forms');
 goog.require('goog.events');
 goog.require('goog.string');
 
@@ -11,7 +12,16 @@ cr.classroom.initialize = function() {
     var classes_data = cr.common.decodeJson(cr_class_list);
 
     classes_data.forEach(function(class_data) {
-      cr.classroom.createClassEl(class_data);
+      cr.classroom.createClassListEl(class_data);
+      cr.classroom.createClassOptionEl(class_data);
+    });
+  }
+
+  if (cr_student_list != null) {
+    var student_data = cr.common.decodeJson(cr_student_list);
+
+    student_data.forEach(function(student_data) {
+      cr.classroom.createStudentOptionEl(student_data);
     });
   }
 
@@ -19,7 +29,7 @@ cr.classroom.initialize = function() {
                      cr.classroom.createClassElViaAddButton);
 };
 
-cr.classroom.createClassEl = function(class_data) {
+cr.classroom.createClassListEl = function(class_data) {
   this.class_list_root = 
     this.class_list_root || goog.dom.getElement('class_list_table');
 
@@ -45,6 +55,28 @@ cr.classroom.createClassEl = function(class_data) {
                      cr.classroom.deleteClassroom);
 };
 
+cr.classroom.createClassOptionEl = function(class_data) {
+  this.select_class_root = 
+    this.select_class_root || goog.dom.getElement('classroom_select');
+
+  var opt_el = goog.dom.createDom('option',
+    {'value': class_data['id']});
+  opt_el.innerHTML = class_data['name'];
+
+  goog.dom.appendChild(this.select_class_root, opt_el);
+};
+
+cr.classroom.createStudentOptionEl = function(student_data) {
+  this.select_student_root = 
+    this.select_student_root || goog.dom.getElement('student_select');
+
+  var opt_el = goog.dom.createDom('option',
+    {'value': student_data['id']});
+  opt_el.innerHTML = student_data['name'];
+
+  goog.dom.appendChild(this.select_student_root, opt_el);
+};
+
 cr.classroom.createClassElViaAddButton = function(unused_e) {
   var class_name = goog.dom.getElement('add_class_text_field').value;
   if (class_name == '') {
@@ -57,7 +89,8 @@ cr.classroom.createClassElViaAddButton = function(unused_e) {
         'id': response_obj['id'],
         'name': goog.string.htmlEscape(class_name)};
 
-      cr.classroom.createClassEl(class_data);
+      cr.classroom.createClassListEl(class_data);
+      cr.classroom.createClassOptionEl(class_data);
     } else {
       console.log('Failed to add class to backend: ' + class_name);
     }
@@ -86,4 +119,20 @@ cr.classroom.removeClassroomEl = function(delete_button) {
   var row = delete_button.parentNode.parentNode;
   /* Table element. */
   row.parentNode.removeChild(row);
+};
+
+cr.classroom.enrollStudentViaButton = function() {
+  var form_el = goog.dom.getElement('enroll_student_form');
+  var form_data = goog.dom.forms.getFormDataMap(form_el).toObject();
+  var message_el = goog.dom.getElement('enroll_notification');
+
+  var enroll_callback = function(success_bool, response_obj) {
+    if (success_bool) {
+      message_el.innerHTML = goog.string.htmlEscape(response_obj);
+    } else {
+      message_el.innerHTML = 'Failed to enroll student.';
+    }
+  };
+
+  cr.xhr.enrollStudent(form_data, enroll_callback);
 };

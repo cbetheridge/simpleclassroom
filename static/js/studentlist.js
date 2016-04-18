@@ -99,14 +99,16 @@ cr.studentlist.createStudentFormSubmit = function() {
 
   var add_student_callback = function(success_bool, response_obj) {
     if (success_bool) {
-      var student_data = {
-        'id': response_obj['id'],
-        'first_name': goog.string.htmlEscape(form_data['first_name']),
-        'last_name': goog.string.htmlEscape(form_data['last_name']),
-        'email': goog.string.htmlEscape(form_data['email'])
-      };
+      if (yes_radio.checked) {
+        var student_data = {
+          'id': response_obj['id'],
+          'first_name': goog.string.htmlEscape(form_data['first_name']),
+          'last_name': goog.string.htmlEscape(form_data['last_name']),
+          'email': goog.string.htmlEscape(form_data['email'])
+        };
 
-      cr.studentlist.createStudentEl(student_data);
+        cr.studentlist.createStudentEl(student_data);
+      }
     } else {
       console.log('Failed to add student to backend.');
     }
@@ -141,7 +143,7 @@ cr.studentlist.removeStudentEl = function(del_button_el) {
 };
 
 cr.studentlist.isFilteredToClass = function() {
-  return !(cr.studentlist.CLASSID === null ||
+  return !(cr.studentlist.CLASSID == undefined ||
            cr.studentlist.CLASSID.length == 0 ||
            cr.studentlist.CLASSID == 'All');
 };

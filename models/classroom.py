@@ -58,3 +58,6 @@ class Membership (models.Model):
   classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
   student = models.ForeignKey(Student, on_delete=models.CASCADE)
   enroll_date = models.DateField(auto_now_add=True)
+
+  class Meta:
+    unique_together = ("classroom", "student")

@@ -67,6 +67,18 @@ cr.xhr.unenrollStudent = function(enrollment_data, callback) {
                JSON.stringify(enrollment_data), cr.xhr.CSRF_HEADER);
 };
 
+cr.xhr.enrollStudent = function(enrollment_data, callback) {
+  cr.xhr.ensureCSRF();
+  var request = new goog.net.XhrIo();
+
+  goog.events.listen(request, 'complete', function(unused_e) {
+    callback(request.isSuccess(), this.getResponse());
+  });
+
+  request.send(cr.common.URLS['enrollStudent'], 'POST',
+               JSON.stringify(enrollment_data), cr.xhr.CSRF_HEADER);
+};
+
 cr.xhr.ensureCSRF = function() {
   cr.xhr.CSRF_HEADER = cr.xhr.CSRF_HEADER || {
     'X-CSRFToken': goog.net.cookies.get('csrftoken')}
