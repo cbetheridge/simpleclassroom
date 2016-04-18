@@ -54,3 +54,13 @@ def add_student(request):
     member.save()
 
   return HttpResponse(json.dumps({'id': new_student.pk}))
+
+@require_POST
+def delete_student(request):
+  params = request.POST if request.POST else None
+  params = json.loads(list(params)[0])
+
+  target = Student.objects.get(pk=params['id'][0])
+  target.delete()    
+
+  return HttpResponse('OK')

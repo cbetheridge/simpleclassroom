@@ -11,7 +11,7 @@ cr.xhr.addClassroom = function(class_name, callback) {
   cr.xhr.ensureCSRF();
   var request = new goog.net.XhrIo();
 
-  goog.events.listen(request, 'complete', function(e) {
+  goog.events.listen(request, 'complete', function(unused_e) {
     callback(request.isSuccess(), this.getResponseJson()[0]);
   });
 
@@ -23,11 +23,23 @@ cr.xhr.addStudent = function(student_data, callback) {
   cr.xhr.ensureCSRF();
   var request = new goog.net.XhrIo();
 
-  goog.events.listen(request, 'complete', function(e) {
+  goog.events.listen(request, 'complete', function(unused_e) {
     callback(request.isSuccess(), this.getResponseJson());
   });
 
   request.send(cr.common.URLS['addStudent'], 'POST',
+               JSON.stringify(student_data), cr.xhr.CSRF_HEADER);
+};
+
+cr.xhr.delStudent = function(student_data, callback) {
+  cr.xhr.ensureCSRF();
+  var request = new goog.net.XhrIo();
+
+  goog.events.listen(request, 'complete', function(unused_e) {
+    callback(request.isSuccess());
+  });
+
+  request.send(cr.common.URLS['delStudent'], 'POST',
                JSON.stringify(student_data), cr.xhr.CSRF_HEADER);
 };
 

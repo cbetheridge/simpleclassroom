@@ -88,7 +88,6 @@ cr.studentlist.createStudentFormSubmit = function() {
     form_data['class_id'] = '';
   }
 
-
   var add_student_callback = function(success_bool, response_obj) {
     if (success_bool) {
       var student_data = {
