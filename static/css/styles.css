@@ -31,6 +31,10 @@ html, body, .max_height {
   padding: .5em;
 }
 
+.sidebar {
+  width: 8em;
+}
+
 /* Main content styling */
 
 ul {
@@ -60,22 +64,26 @@ ul {
   width: 100%;
 }
 
-.hundred-pct-cell {
+.max-cell {
   display: table-cell;
   width: 100%;
 }
 
-.fifty-pct-cell {
+.large-cell {
   display: table-cell;
   width: 50%;
 }
 
-.twenty-pct-cell {
+.small-cell {
   display: table-cell;
-  width: 20%;
+  width: 30%;
 }
 
 .min-cell {
   display: table-cell;
   width: 1%;
+}
+
+.table-row div,header {
+  min-height: 38px;
 }

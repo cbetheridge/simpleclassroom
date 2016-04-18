@@ -28,7 +28,7 @@ cr.classroom.createClassEl = function(class_data) {
     {'href': details_url});
   class_link_el.innerHTML = class_data['name'];
   var class_name_el = goog.dom.createDom('div',
-    {'class': 'hundred-pct-cell table-border'}, class_link_el);
+    {'class': 'max-cell table-border'}, class_link_el);
 
   var del_button = goog.dom.createDom('input', 
     {'type': 'button', 'class': 'class_del_button', 'value': 'Delete',

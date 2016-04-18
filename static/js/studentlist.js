@@ -24,14 +24,22 @@ cr.studentlist.createStudentEl = function(student_data) {
   this.student_list_root = 
     this.student_list_root || goog.dom.getElement('student_list_table');
 
+  var details_url =
+    cr.common.URLS['studentDetails'] + '?Id=' + student_data['id'];
+  var details_link_el = goog.dom.createDom('a',
+    {'href': details_url});
+  details_link_el.innerHTML = student_data['id'];
+  var id_el = goog.dom.createDom('div',
+    {'class': 'min-cell table-border'}, details_link_el);
+
   var first_name_el = goog.dom.createDom('div',
-    {'class': 'fifty-pct-cell table-border'});
+    {'class': 'large-cell table-border'});
   first_name_el.innerHTML = student_data['first_name']
   var last_name_el = goog.dom.createDom('div',
-    {'class': 'fifty-pct-cell table-border'});
+    {'class': 'large-cell table-border'});
   last_name_el.innerHTML = student_data['last_name']
   var email_el = goog.dom.createDom('div',
-    {'class': 'twenty-pct-cell table-border'});
+    {'class': 'small-cell table-border'});
   email_el.innerHTML = student_data['email']
 
   var del_button = goog.dom.createDom('input', 
@@ -43,7 +51,7 @@ cr.studentlist.createStudentEl = function(student_data) {
 
   var row = goog.dom.createDom(
     'div', {'class': 'table-row table-border'},
-    [first_name_el, last_name_el, email_el, del_button_el]);
+    [id_el, first_name_el, last_name_el, email_el, del_button_el]);
   goog.dom.appendChild(this.student_list_root, row);
 
   goog.events.listen(del_button, goog.events.EventType.CLICK,

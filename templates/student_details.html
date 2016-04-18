@@ -1,5 +1,31 @@
 {% extends "base_standard_nav.html" %}
 
+{% block head %}
+<script>var cr_student_data="{{ student_data }}" || null</script>
+<script src="static/js/studentdetails.js"></script>
+{% endblock %}
+
 {% block content %}
-Placeholder for Student Details
+<h3>Student #{{ id }}:</h3>
+<section class="table-root" id="student_list_table">
+  <div class="table-row table-border">
+    <header class="small-cell table-border"><strong>FirstName</strong></header>
+    <div class="max-cell table-border">{{ first_name }}</div>
+  </div>
+  <div class="table-row table-border">
+    <header class="small-cell table-border"><strong>LastName</strong></header>
+    <div class="max-cell table-border">{{ last_name }}</div>
+  </div>
+  <div class="table-row table-border">
+    <header class="small-cell table-border"><strong>Email</strong></header>
+    <div class="max-cell table-border">{{ email }}</div>
+  </div>
+</section>
+<br>
+<h4>Enrolled Classes:</h4>
+<ul id="class_list_table">
+{% for class in class_list %}
+  <li>{{ class|safe }}</li>
+{% endfor %}
+</ul>
 {% endblock %}

@@ -4,6 +4,7 @@ cr.common.URLS = {
   'addClassroom': '/io/add_class/',
   'delClassroom': '/io/del_class/',
   'studentList': '/student_list/',
+  'studentDetails': '/student_details/',
 };
 
 cr.common.decodeJson = function(escaped_json) {
